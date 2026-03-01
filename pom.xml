@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.8</version>
+    <version>3.4.3</version>
     <relativePath/>
   </parent>
 
@@ -22,6 +22,7 @@
     <module>microservice-gateway</module>
     <module>microservice-eureka</module>
     <module>microservice-config</module>
+    <module>microservice-student</module>
   </modules>
 
   <properties>
