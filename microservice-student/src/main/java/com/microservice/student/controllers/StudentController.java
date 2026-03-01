@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/student")
+@RequestMapping("api/students")
 public class StudentController {
 
     private final StudentService studentService;
