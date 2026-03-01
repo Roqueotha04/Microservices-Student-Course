@@ -7,13 +7,13 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
   datasource:
-    driver-class-name: com.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/coursesdb
-    username: postgre
+    username: postgres
     password: bddroque
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
