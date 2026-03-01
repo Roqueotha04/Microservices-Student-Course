@@ -22,12 +22,12 @@ public class StudentController {
         studentService.save(student);
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public ResponseEntity<?> findAllStudents(){
         return ResponseEntity.ok(studentService.findAll());
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(studentService.findById(id));
     }
