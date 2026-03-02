@@ -1,6 +1,9 @@
 package com.microservice.course.controllers;
 
+import com.microservice.course.dto.CourseDTO;
+import com.microservice.course.dto.EnrollmentDTO;
 import com.microservice.course.entities.Course;
+import com.microservice.course.entities.Enrollment;
 import com.microservice.course.services.CourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +38,11 @@ public class CourseController {
     @GetMapping("/findStudentsByCourse/{id}")
     public ResponseEntity<?> findStudentsByCourseId(@PathVariable Long id){
         return ResponseEntity.ok(courseService.findStudentsByCourseId(id));
+    }
+
+    @PostMapping ("/addStudentToCourse")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addStudentToCourse(@RequestBody EnrollmentDTO enrollmentDTO){
+        courseService.addStudentToCourse(enrollmentDTO.courseId(), enrollmentDTO.studentId());
     }
 }

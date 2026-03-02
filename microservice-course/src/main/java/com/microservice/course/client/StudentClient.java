@@ -13,4 +13,7 @@ public interface StudentClient {
     @GetMapping("/findByCourse/{id}")
     List<StudentDTO> findAllStudentsByCourse(@PathVariable Long id);
 
+    @GetMapping("/{id}")
+    StudentDTO findStudentById(@PathVariable Long id);
+
 }
