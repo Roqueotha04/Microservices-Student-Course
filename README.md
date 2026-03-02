@@ -11,6 +11,7 @@ Most of the features that will be added soon are already implemented in my other
 - `book_loan`
 - `superhero backend`
 
+You can find these fully completed end-to-end projects on my GitHub profile. 
 The upcoming features planned for this repository are detailed at the end of this document.
 
 ---
@@ -110,4 +111,5 @@ The following improvements will be incorporated:
 ## 📈 Objective
 
 This repository demonstrates practical implementation of modern microservices architecture patterns commonly used in enterprise environments.
+
 
