@@ -40,9 +40,9 @@ public class CourseController {
         return ResponseEntity.ok(courseService.findStudentsByCourseId(id));
     }
 
-    @PostMapping ("/addStudentToCourse")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addStudentToCourse(@RequestBody EnrollmentDTO enrollmentDTO){
-        courseService.addStudentToCourse(enrollmentDTO.courseId(), enrollmentDTO.studentId());
+    @PostMapping("/addStudentToCourse")
+    public ResponseEntity<Enrollment> addStudentToCourse(@RequestBody EnrollmentDTO enrollmentDTO) {
+        Enrollment enrollment = courseService.addStudentToCourse(enrollmentDTO.courseId(), enrollmentDTO.studentId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(enrollment);
     }
 }

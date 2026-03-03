@@ -51,6 +51,7 @@ public class CourseServiceImpl implements CourseService{
         return new StudentsByCourseResponse(course.getName(), course.getTeacher(), studentDTOList);
     }
 
+    //Later I´ll add validations to not add Students that are already enrolled in the course
     @Override
     public Enrollment addStudentToCourse(Long courseId, Long studentId) {
         log.info("Starting enrollment: Student ID {} into Course ID {}", studentId, courseId);

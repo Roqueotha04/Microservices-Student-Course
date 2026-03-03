@@ -24,6 +24,7 @@
     <module>microservice-config</module>
     <module>microservice-student</module>
     <module>microservice-course</module>
+    <module>microservice-email-sender</module>
   </modules>
 
   <properties>
