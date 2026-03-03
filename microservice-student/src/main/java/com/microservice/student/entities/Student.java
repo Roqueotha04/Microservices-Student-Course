@@ -14,6 +14,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "students")
 public class Student {
 
+    public Student(String email, String name, String lastName) {
+        this.email = email;
+        this.name = name;
+        this.lastName = lastName;
+    }
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
