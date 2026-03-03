@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
     @Configuration
     public class RabbitMQConfig {
 
-        public static final String EXCHANGE_NAME = "student.exchange";
-        public static final String QUEUE_NAME = "student.email.queue";
-        public static final String ROUTING_KEY = "student.enrolled";
+        public static final String EXCHANGE_NAME = "course.exchange";
+        public static final String QUEUE_NAME = "course.email.queue";
+        public static final String ROUTING_KEY = "course.key";
 
         @Bean
         public Queue queue(){
