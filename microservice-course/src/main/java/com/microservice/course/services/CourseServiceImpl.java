@@ -67,7 +67,9 @@ public class CourseServiceImpl implements CourseService{
 
         Enrollment enrollment = new Enrollment(courseId, studentId);
 
-        NotificationRequest notification = new NotificationRequest(student.email(), "thanks for enrolling", "temardovich");
+        String subject = "¡Bienvenido al curso de " + course.getName() + "!";
+        String body = String.format("Hola %s, confirmamos tu inscripción al curso de %s.", student.name(), course.getName());
+        NotificationRequest notification = new NotificationRequest(student.email(), subject, body);
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.EXCHANGE_NAME,
                 RabbitMQConfig.ROUTING_KEY,
