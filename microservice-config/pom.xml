@@ -3,9 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.mycompany.app</groupId>
-		<artifactId>MicroservicesSpring</artifactId>
+		<groupId>com.mycompany.parent</groupId>
+		<artifactId>microservices-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>com.microservice.config</groupId>
 	<artifactId>microservice-config</artifactId>
@@ -41,19 +42,9 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
+		<finalName>app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

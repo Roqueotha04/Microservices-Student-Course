@@ -17,18 +17,14 @@ import java.util.List;
 public class StudentServiceImplTest {
 
     @Mock
-    private final StudentRespository studentRespository;
+    private StudentRespository studentRespository;
 
     @InjectMocks
-    private final StudentServiceImpl studentService;
+    private StudentServiceImpl studentService;
 
-    public StudentServiceImplTest(StudentRespository studentRespository, StudentServiceImpl studentService) {
-        this.studentRespository = studentRespository;
-        this.studentService = studentService;
-    }
 
     @Test
-    public void findAll(){
+    public void testFindAll(){
         List<Student> studentListMock = DataProvider.studentListMock();
 
         when(studentRespository.findAll()).thenReturn(studentListMock);

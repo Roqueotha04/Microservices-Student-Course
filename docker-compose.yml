@@ -1,0 +1,149 @@
+version: '3.8'
+
+services:
+
+  config-server:
+    build:
+      context: .
+      dockerfile: ./microservice-config/Dockerfile
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - msvc-network
+
+  eureka-server:
+    build:
+      context: .
+      dockerfile: ./microservice-eureka/Dockerfile
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_INSTANCE_HOSTNAME=eureka-server
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    depends_on:
+      - config-server
+    networks:
+      - msvc-network
+
+  msvc-gateway:
+    build:
+      context: .
+      dockerfile: ./microservice-gateway/Dockerfile
+    container_name: msvc-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - msvc-network
+
+  msvc-student:
+    build:
+      context: .
+      dockerfile: ./microservice-student/Dockerfile
+    container_name: msvc-student
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-students:3306/studentsdb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=bddroque
+    depends_on:
+      - db-students
+      - config-server
+      - eureka-server
+    networks:
+      - msvc-network
+
+  msvc-course:
+    build:
+      context: .
+      dockerfile: ./microservice-course/Dockerfile
+    container_name: msvc-course
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-courses:5432/coursesdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=bddroque
+      - SPRING_RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - db-courses
+      - rabbitmq
+      - config-server
+      - eureka-server
+    networks:
+      - msvc-network
+
+  msvc-email-sender:
+    build:
+      context: .
+      dockerfile: ./microservice-email-sender/Dockerfile
+    container_name: msvc-email-sender
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - EMAIL_SENDER=${EMAIL_SENDER}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+    depends_on:
+      - rabbitmq
+      - config-server
+      - eureka-server
+    networks:
+      - msvc-network
+
+  db-students:
+    image: mysql:8.0
+    container_name: db-students
+    environment:
+      MYSQL_DATABASE: studentsdb
+      MYSQL_ROOT_PASSWORD: bddroque
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - msvc-network
+
+  db-courses:
+    image: postgres:15-alpine
+    container_name: db-courses
+    environment:
+      POSTGRES_DB: coursesdb
+      POSTGRES_PASSWORD: bddroque
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - msvc-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: msvc-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - msvc-network
+
+networks:
+  msvc-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  postgres-data:
