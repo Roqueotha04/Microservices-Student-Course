@@ -79,7 +79,7 @@ Synchronous service-to-service calls are handled using **OpenFeign**.
 - No hardcoded URLs  
 - Cleaner inter-service contracts  
 
-This is used for direct communication between core domain services when immediate responses are required
+This is used for direct communication between core domain services when immediate responses are required.
 
 ---
 
@@ -111,6 +111,7 @@ The following improvements will be incorporated:
 ## 📈 Objective
 
 This repository demonstrates practical implementation of modern microservices architecture patterns commonly used in enterprise environments.
+
 
 
 
