@@ -15,11 +15,11 @@ spring:
           enabled: true
       routes:
         - id: students
-          uri: lb://microservice-student
+          uri: lb://MSVC-STUDENT
           predicates:
             - Path=/api/students/**
         - id: courses
-          uri: lb://microservice-course
+          uri: lb://MSVC-COURSE
           predicates:
             - Path= /api/courses/**
 

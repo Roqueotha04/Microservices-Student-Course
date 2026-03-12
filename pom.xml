@@ -10,21 +10,20 @@
         <groupId>com.mycompany.parent</groupId>
         <artifactId>microservices-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom-parent/pom.xml</relativePath>
+        <relativePath>pom-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>microservices-aggregator</artifactId>
     <packaging>pom</packaging>
-
     <name>microservices-aggregator</name>
 
     <modules>
-        <module>../microservice-gateway</module>
-        <module>../microservice-eureka</module>
-        <module>../microservice-config</module>
-        <module>../microservice-student</module>
-        <module>../microservice-course</module>
-        <module>../microservice-email-sender</module>
+        <module>microservice-gateway</module>
+        <module>microservice-eureka</module>
+        <module>microservice-config</module>
+        <module>microservice-student</module>
+        <module>microservice-course</module>
+        <module>microservice-email-sender</module>
     </modules>
 
 </project>
