@@ -40,7 +40,7 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public Course findById(Long id) {
-        return courseRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Could not found course with id: " +id));
+        return getCourseOrThrow(id);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public StudentsByCourseResponse findStudentsByCourseId(Long id) {
-        Course course = courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
+        Course course = getCourseOrThrow(id);
 
         List<StudentDTO> studentDTOList = studentClient.findAllStudentsByCourse(id);
 
@@ -62,7 +62,7 @@ public class CourseServiceImpl implements CourseService{
     public Enrollment addStudentToCourse(Long courseId, Long studentId) {
         log.info("Starting enrollment: Student ID {} into Course ID {}", studentId, courseId);
 
-        Course course = findById(courseId);
+        Course course = getCourseOrThrow(courseId);
         StudentDTO student = validateAndGetStudent(studentId);
 
         Enrollment enrollment = new Enrollment(courseId, studentId);
@@ -77,6 +77,12 @@ public class CourseServiceImpl implements CourseService{
         );
         return enrollmenRepository.save(enrollment);
     }
+
+    @Override
+    public Course getCourseOrThrow(Long id) {
+        return courseRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Could not found course with id: " +id));
+    }
+
 
     private StudentDTO validateAndGetStudent(Long studentId) {
         try {

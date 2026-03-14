@@ -13,4 +13,5 @@ public interface CourseService {
     public void save (Course course);
     public StudentsByCourseResponse findStudentsByCourseId(Long id);
     public Enrollment addStudentToCourse(Long studentId, Long courseId);
+    public Course getCourseOrThrow(Long id);
 }
