@@ -22,11 +22,8 @@ public class EmailServiceImpl implements EmailService{
             helper.setTo(to);
             helper.setSubject(subject);
 
-            String htmlContent = "<html><body style='font-family: Arial, sans-serif;'>" +
-                    "<h1 style='color: #2e6c80;'>¡Bienvenido al curso!</h1>" +
-                    "<p>" + content + "</p>" +
-                    "<footer style='margin-top: 20px; border-top: 1px solid #ccc;'>Soporte Académico</footer>" +
-                    "</body></html>";
+            String htmlContent = createEmailMessage(content);
+
 
             helper.setText(htmlContent, true);
             mailSender.send(message);
@@ -34,4 +31,14 @@ public class EmailServiceImpl implements EmailService{
             throw new RuntimeException("Error sending email", e);
         }
     }
+
+    public String createEmailMessage(String content){
+        return "<html><body style='font-family: Arial, sans-serif;'>" +
+                "<h1 style='color: #2e6c80;'>¡Bienvenido al curso!</h1>" +
+                "<p>" + content + "</p>" +
+                "<footer style='margin-top: 20px; border-top: 1px solid #ccc;'>Soporte Académico</footer>" +
+                "</body></html>";
+    }
+
+
 }
