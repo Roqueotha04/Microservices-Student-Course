@@ -7,8 +7,13 @@ services:
       context: .
       dockerfile: ./microservice-config/Dockerfile
     container_name: config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
+      - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:/app/config-files
     ports:
       - "8888:8888"
+    volumes:
+      - ./microservice-config/src/main/resources/configurations:/app/config-files
     networks:
       - msvc-network
 
