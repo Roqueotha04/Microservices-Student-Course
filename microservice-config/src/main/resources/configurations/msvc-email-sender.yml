@@ -12,8 +12,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${email.sender}
-    password: ${email.password}
+    username: ${EMAIL_SENDER}
+    password: ${EMAIL_PASSWORD}
 
 eureka:
   instance:
