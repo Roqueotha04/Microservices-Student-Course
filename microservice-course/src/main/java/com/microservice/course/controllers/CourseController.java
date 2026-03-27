@@ -40,6 +40,7 @@ public class CourseController {
         return ResponseEntity.ok(courseService.findStudentsByCourseId(id));
     }
 
+    // Creates Student-Course Entity
     @PostMapping("/addStudentToCourse")
     public ResponseEntity<Enrollment> addStudentToCourse(@RequestBody EnrollmentDTO enrollmentDTO) {
         Enrollment enrollment = courseService.addStudentToCourse(enrollmentDTO.courseId(), enrollmentDTO.studentId());

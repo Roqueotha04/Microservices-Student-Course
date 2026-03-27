@@ -18,6 +18,7 @@ public class EmailConsumer {
         this.emailService = emailService;
     }
 
+    //Recieves RabbitMQ message
     @RabbitListener(queues = "course.email.queue")
     public void receiveMessage(NotificationRequest request) {
         log.info("Message sent to {}", request.email());
