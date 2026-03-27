@@ -104,7 +104,7 @@ The following improvements will be incorporated:
 - 🧪 Unit and integration testing  
 - 🐳 Full Dockerization  
 
-> These capabilities are already implemented in other personal projects and will be progressively integrated here to complete a production-ready stack.
+> These capabilities are already implemented in other personal projects and will be progressively integrated here to complete a production-ready stack
 
 ---
 
