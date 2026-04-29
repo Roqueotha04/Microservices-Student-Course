@@ -4,7 +4,7 @@
 
 > ⚠️ **Actively under development**
 
-This project is continuously evolving with architectural, security, and deployment improvements.
+This project is continuously evolving with architectural, security, and deployment improvements
 
 Most of the features that will be added soon are already implemented in my other projects:
 
